@@ -1,7 +1,7 @@
 inherit kf5
 
 NAME="kf5-kio"
-VERSION=5.12.0
+VERSION=5.27.0
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="KDE 5 file management library"
@@ -11,17 +11,19 @@ FTP out of the box and can be extended by plugins to support other protocols as
 well. The framework can also be used to bridge a native protocol to a file-based
 interface."
 
+PATCH_URI="5.27.0-cygwin-ftm.patch"
+
 PKG_NAMES="libKF5KIO5 libKF5KIO-devel"
 libKF5KIO5_CONTENTS="
-	etc/postinstall/kf5-kio.sh
+	--exclude=protocoltojson.*
 	etc/xdg/accept-languages.codes
 	etc/xdg/kshorturifilterrc
 	usr/bin/cygKF5KIOCore-5.dll
 	usr/bin/cygKF5KIOFileWidgets-5.dll
+	usr/bin/cygKF5KIOGui-5.dll
 	usr/bin/cygKF5KIONTLM-5.dll
 	usr/bin/cygKF5KIOWidgets-5.dll
 	usr/bin/kcookiejar5.exe
-	usr/bin/kmailservice5.exe
 	usr/bin/ktelnetservice5.exe
 	usr/bin/ktrash5.exe
 	${QT5_PLUGINSDIR#/}/kcm_*.dll
@@ -34,9 +36,11 @@ libKF5KIO5_CONTENTS="
 	usr/libexec/kf5/kioexec.exe
 	usr/libexec/kf5/kioslave.exe
 	usr/libexec/kf5/kpac_dhcp_helper.exe
-	usr/share/applications/kmailservice5.desktop
 	usr/share/applications/ktelnetservice5.desktop
+	usr/share/dbus-1/services/org.kde.kcookiejar5.service
 	usr/share/dbus-1/services/org.kde.kiod5.service
+	usr/share/dbus-1/services/org.kde.kpasswdserver.service
+	usr/share/dbus-1/services/org.kde.kssld5.service
 	usr/share/doc/
 	usr/share/kf5/kcookiejar/
 	usr/share/knotifications5/proxyscout.notifyrc
@@ -47,7 +51,9 @@ libKF5KIO5_CONTENTS="
 "
 libKF5KIO_devel_REQUIRES="libKF5Bookmarks-devel libKF5Completion-devel libKF5ConfigWidgets-devel libKF5CoreAddons-devel libKF5DBusAddons-devel libKF5I18n-devel libKF5IconThemes-devel libKF5ItemViews-devel libKF5JobWidgets-devel libKF5Service-devel libKF5Solid-devel libKF5WidgetsAddons-devel libKF5WindowSystem-devel libKF5XmlGui-devel libQt5Core-devel libQt5Gui-devel"
 libKF5KIO_devel_CONTENTS="
+	usr/bin/protocoltojson.exe
 	usr/include/KF5/KIOCore/
+	usr/include/KF5/KIOGui/
 	usr/include/KF5/KIOFileWidgets/
 	usr/include/KF5/KIOWidgets/
 	usr/include/KF5/kio/
@@ -55,10 +61,12 @@ libKF5KIO_devel_CONTENTS="
 	usr/lib/cmake/KF5KIO/
 	${QT5_MKSPECSDIR#/}/modules/qt_KIOCore.pri
 	${QT5_MKSPECSDIR#/}/modules/qt_KIOFileWidgets.pri
+	${QT5_MKSPECSDIR#/}/modules/qt_KIOGui.pri
 	${QT5_MKSPECSDIR#/}/modules/qt_KIOWidgets.pri
 	${QT5_MKSPECSDIR#/}/modules/qt_KNTLM.pri
 	usr/lib/libKF5KIOCore.dll.a
 	usr/lib/libKF5KIOFileWidgets.dll.a
+	usr/lib/libKF5KIOGui.dll.a
 	usr/lib/libKF5KIONTLM.dll.a
 	usr/lib/libKF5KIOWidgets.dll.a
 	usr/share/dbus-1/interfaces/

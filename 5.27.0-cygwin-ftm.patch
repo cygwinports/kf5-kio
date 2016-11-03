@@ -1,0 +1,19 @@
+kpac_dhcp_helper.c: In function ‘set_gid’:
+kpac_dhcp_helper.c:59:9: error: implicit declaration of function ‘setgroups’
+kpac_dhcp_helper.c: In function ‘main’:
+kpac_dhcp_helper.c:275:5: error: unknown type name ‘fd_set’
+kpac_dhcp_helper.c:283:5: error: implicit declaration of function ‘FD_ZERO’
+kpac_dhcp_helper.c:284:5: error: implicit declaration of function ‘FD_SET’
+kpac_dhcp_helper.c:287:9: error: implicit declaration of function ‘select’
+kpac_dhcp_helper.c:287:58: error: implicit declaration of function ‘FD_ISSET’
+
+--- origsrc/kio-5.27.0/src/kpac/kpac_dhcp_helper.c	2016-10-02 04:53:23.000000000 -0500
++++ src/kio-5.27.0/src/kpac/kpac_dhcp_helper.c	2016-11-01 22:35:31.230715300 -0500
+@@ -17,6 +17,7 @@
+    Boston, MA 02110-1301, USA.
+ */
+ 
++#define _DEFAULT_SOURCE
+ #include <arpa/inet.h>
+ #include <netinet/in.h>
+ #include <sys/types.h>
