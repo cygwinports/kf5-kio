@@ -1,7 +1,7 @@
 inherit kf5
 
 NAME="kf5-kio"
-VERSION=5.27.0
+VERSION=5.35.0
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="KDE 5 file management library"
@@ -11,7 +11,10 @@ FTP out of the box and can be extended by plugins to support other protocols as
 well. The framework can also be used to bridge a native protocol to a file-based
 interface."
 
-PATCH_URI="5.27.0-cygwin-ftm.patch"
+PATCH_URI="
+	5.27.0-cygwin-ftm.patch
+	5.35.0-cygwin-acl.patch
+"
 
 PKG_NAMES="libKF5KIO5 libKF5KIO-devel"
 libKF5KIO5_CONTENTS="
@@ -37,10 +40,7 @@ libKF5KIO5_CONTENTS="
 	usr/libexec/kf5/kioslave.exe
 	usr/libexec/kf5/kpac_dhcp_helper.exe
 	usr/share/applications/ktelnetservice5.desktop
-	usr/share/dbus-1/services/org.kde.kcookiejar5.service
-	usr/share/dbus-1/services/org.kde.kiod5.service
-	usr/share/dbus-1/services/org.kde.kpasswdserver.service
-	usr/share/dbus-1/services/org.kde.kssld5.service
+	usr/share/dbus-1/services/org.kde.*.service
 	usr/share/doc/
 	usr/share/kf5/kcookiejar/
 	usr/share/knotifications5/proxyscout.notifyrc

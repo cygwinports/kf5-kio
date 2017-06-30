@@ -1,0 +1,64 @@
+acl_entry_t is an opaque struct in glibc, but ours is a uint64_t
+
+--- origsrc/kio-5.35.0/src/core/kacl.cpp	2017-06-03 05:23:46.000000000 -0500
++++ src/kio-5.35.0/src/core/kacl.cpp	2017-06-29 02:22:58.440493700 -0500
+@@ -162,12 +162,12 @@ static acl_entry_t entryForTag(acl_t acl
+         }
+         ret = acl_get_entry(acl, ACL_NEXT_ENTRY, &entry);
+     }
+-    return nullptr;
++    return (acl_entry_t)NULL;
+ }
+ 
+ static unsigned short entryToPermissions(acl_entry_t entry)
+ {
+-    if (entry == nullptr) {
++    if (entry == (acl_entry_t)NULL) {
+         return 0;
+     }
+     acl_permset_t permset;
+@@ -181,7 +181,7 @@ static unsigned short entryToPermissions
+ 
+ static void permissionsToEntry(acl_entry_t entry, unsigned short v)
+ {
+-    if (entry == nullptr) {
++    if (entry == (acl_entry_t)NULL) {
+         return;
+     }
+     acl_permset_t permset;
+@@ -330,7 +330,7 @@ unsigned short KACL::maskPermissions(boo
+     exists = true;
+ #if HAVE_POSIX_ACL
+     acl_entry_t entry = entryForTag(d->m_acl, ACL_MASK);
+-    if (entry == nullptr) {
++    if (entry == (acl_entry_t)NULL) {
+         exists = false;
+         return 0;
+     }
+@@ -344,7 +344,7 @@ unsigned short KACL::maskPermissions(boo
+ bool KACL::KACLPrivate::setMaskPermissions(unsigned short v)
+ {
+     acl_entry_t entry = entryForTag(m_acl, ACL_MASK);
+-    if (entry == nullptr) {
++    if (entry == (acl_entry_t)NULL) {
+         acl_create_entry(&m_acl, &entry);
+         acl_set_tag_type(entry, ACL_MASK);
+     }
+@@ -437,7 +437,7 @@ bool KACL::KACLPrivate::setNamedUserOrGr
+         // 23.1.1 of 1003.1e states that as soon as there is a named user or
+         // named group entry, there needs to be a mask entry as well, so add
+         // one, if the user hasn't explicitly set one.
+-        if (entryForTag(newACL, ACL_MASK) == nullptr) {
++        if (entryForTag(newACL, ACL_MASK) == (acl_entry_t)NULL) {
+             acl_calc_mask(&newACL);
+         }
+     }
+@@ -536,7 +536,7 @@ bool KACL::KACLPrivate::setAllUsersOrGro
+         // 23.1.1 of 1003.1e states that as soon as there is a named user or
+         // named group entry, there needs to be a mask entry as well, so add
+         // one, if the user hasn't explicitly set one.
+-        if (entryForTag(newACL, ACL_MASK) == nullptr) {
++        if (entryForTag(newACL, ACL_MASK) == (acl_entry_t)NULL) {
+             acl_calc_mask(&newACL);
+         }
+     }
