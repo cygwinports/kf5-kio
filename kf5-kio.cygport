@@ -1,7 +1,7 @@
 inherit kf5
 
 NAME="kf5-kio"
-VERSION=5.39.0
+VERSION=5.43.0
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="KDE 5 file management library"
@@ -19,6 +19,7 @@ PATCH_URI="
 PKG_NAMES="libKF5KIO5 libKF5KIO-devel"
 libKF5KIO5_CONTENTS="
 	--exclude=protocoltojson.*
+	etc/dbus-1/system.d/org.kde.kio.file.conf
 	etc/xdg/accept-languages.codes
 	etc/xdg/kshorturifilterrc
 	usr/bin/cygKF5KIOCore-5.dll
@@ -34,6 +35,7 @@ libKF5KIO5_CONTENTS="
 	${QT5_PLUGINSDIR#/}/kf5/kio/
 	${QT5_PLUGINSDIR#/}/kf5/kiod/
 	${QT5_PLUGINSDIR#/}/kf5/urifilters/
+	usr/libexec/kauth/file_helper.exe
 	usr/libexec/kf5/kio_http_cache_cleaner.exe
 	usr/libexec/kf5/kiod5.exe
 	usr/libexec/kf5/kioexec.exe
@@ -41,6 +43,7 @@ libKF5KIO5_CONTENTS="
 	usr/libexec/kf5/kpac_dhcp_helper.exe
 	usr/share/applications/ktelnetservice5.desktop
 	usr/share/dbus-1/services/org.kde.*.service
+	usr/share/dbus-1/system-services/org.kde.kio.file.service
 	usr/share/doc/
 	usr/share/kf5/kcookiejar/
 	usr/share/knotifications5/proxyscout.notifyrc
